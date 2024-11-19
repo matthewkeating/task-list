@@ -1,0 +1,267 @@
+:root {
+    --color-purple: #543ce0;
+    --color-red: #B34747;
+    --color-sidebar: #1F1F1F;
+    --color-grey-darkest: #242424;
+    --color-grey-darker: #2b2b2b;
+    --color-grey-dark: #2f2f2f;
+    --color-grey: #363636;
+    --color-grey-light: #555555;
+    --color-grey-lighter: #dddddd;
+    --color-grey-lightest: white;
+
+}
+* {
+    font-size: .99em;
+    font-family: Verdana, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-color: var(--color-grey-darkest);
+    margin: 0px;
+}
+
+#titlebar {
+    -webkit-app-region: drag; /* Makes the title bar draggable */
+    height: 32px; /* Set height to match standard title bars */
+}
+
+.heading {
+    font-size: .7em;
+    text-transform: uppercase;
+    color: var(--color-grey-light);
+    padding-top: 15px;
+}
+
+.extra-top-padding {
+    padding-top: 30px;
+}
+
+/* container for the tasks, including the "add task" input box */
+#tasksArea {
+    padding: 30px 20px 20px 20px;
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+/* style for the "add task" input box */
+#addTaskInputBox {
+    background-color: var(--color-grey-darker);
+    border: 1px solid transparent;
+    border-radius: 5px;
+    box-shadow: none;
+    color: var(--color-grey-lighter);
+    padding: 10px;
+    margin-bottom: 10px;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* style to use if the "add task" input box has focus or has text */
+#addTaskInputBox:focus, #addTaskInputBox:not(:placeholder-shown)
+{
+    background-color: var(--color-grey-darkest);
+    border: 1px solid var(--color-purple);
+}
+
+/* To set the bottom border of a <div> tag to be smaller than the full width of
+the <div>, which I want to do b/c I'm using rounded edges (i.e., a border radius),
+I will use a CSS pseudo-element (in this case, the .task::after element). */
+.task {
+    position: relative; /* Needed for positioning the pseudo-element */
+    display: flex;
+    color: var(color-grey-lighter);
+    font-weight: lighter;
+    align-items: center;
+    padding: 0px 10px 0px 10px;
+    border-radius: 5px;
+}
+
+.task::after {
+    content: ""; /* Required for pseudo-elements */
+    display: block; /* Make it a block element */
+    width: 95%; /* Set the desired width of the border */
+    height: 1px; /* Set the height of the border */
+    background-color: var(--color-grey-dark); /* Border color */
+    position: absolute; /* Position it absolutely */
+    left: 50%; /* Center it horizontally */
+    bottom: 0; /* Position at the bottom */
+    transform: translateX(-50%); /* Adjust for centering */
+}
+
+/* When an element with the .task-title class gains focus, change the background
+of the parent .task element */
+.task:has(> .task-title:focus) {
+    background-color: var(--color-grey);
+}
+
+.task-focused {
+    background-color: var(--color-grey) !important;
+}
+
+.task:hover {
+   background-color: var(--color-grey-darker);
+}
+
+.draggable-container {
+    /* no styling -- used in script */
+}
+
+.draggable-container-empty {
+    min-height: 44px;
+    color: var(--color-grey-light);
+    border-radius: 5px;
+    background-color: var(--color-grey-darker);
+    margin: 5px 10px 5px 10px;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;    /* Centers vertically */
+    display: flex;
+    flex-direction: column;
+}
+
+.dragging {
+    background: var(--color-purple);
+    transform: scale(0.95); /* Decrease div size */
+}
+
+.delete-button {
+    background: transparent;
+    border: none;
+    color: var(--color-grey-light);
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background: transparent;
+    border: none;
+    color: var(--color-red);
+    cursor: pointer;
+}
+
+.task-title {
+    flex: 1;
+    cursor: text;
+    padding: 13px;
+    outline: 0px solid transparent;
+    color: var(--color-grey-lighter);
+}
+
+#other {
+    flex-grow: 1;
+}
+
+.notes-icon {
+    width: 24px;
+    /* cursor: pointer; */
+}
+
+.edit-icon {
+    width: 24px;
+    /* cursor: pointer; */
+    transform: scaleX(-1);
+}
+
+.arrow-icon {
+    width: 16px;
+    cursor: pointer;
+    margin-top: 2px;
+    transform: scaleX(-1);
+}
+
+.pin-icon {
+    width: 17px;
+    cursor: pointer;
+    margin-left: 4px;
+}
+
+.checkmark-icon {
+    width: 18px;
+    cursor: pointer;
+}
+
+#globalNotesArea {
+    padding: 20px;
+}
+
+#globalNotesTextArea {
+    width: 244px;
+    height: 694px;
+    resize: none;
+    color: var(color-grey-lighter);
+    background-color: var(--color-grey-darker);
+    border: 1px solid transparent;
+    border-radius: 5px;
+    outline: none;
+    padding: 10px;
+    color: var(--color-grey-lighter);
+    scrollbar-width: auto; /* Options: auto, thin, none */
+    scrollbar-color: var(--color-grey) var(--color-grey-darker);; /* thumb color, track color */
+}
+
+#sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100vh;
+    background: var(--color-sidebar);
+    color: var(--color-grey-lighter);
+    transition: right 0.3s;
+    box-shadow: 0px 0px 10px 0px #181818;
+
+    padding: 20px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#sidebar.active {
+    right: 0;
+}
+
+#sidebarHeader {
+    display: flex;
+    align-items: flex-start; /* align items in flex box vertically */
+}
+
+#sidebarTitle {
+    margin: 0px 10px 20px 0px;
+    outline: 0px solid transparent;
+    font-weight: bold;
+    display: flex;
+    flex-grow: 1;
+}
+
+#sidebarMain {
+    flex-grow: 1;
+}
+
+#sidebarTextArea {
+    overflow-y: auto;
+    background: var(--color-grey-darkest);
+    border-radius: 5px;
+    outline: none;
+    resize: none;
+    color: var(--color-grey-lighter);
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 260px;
+    border: 1px solid transparent;
+
+    height: 100%;
+    box-sizing: border-box;
+
+    scrollbar-width: auto; /* Options: auto, thin, none */
+    scrollbar-color: var(--color-grey-light) var(--color-grey);; /* thumb color, track color */
+}
+
+::-webkit-scrollbar {
+    display: none; /* Hides the scrollbar */
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Todo App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header id="titlebar" />
+
+  <div id="tasksArea">
+    <input id="addTaskInputBox" type="text" placeholder="+ Add task" onclick="hideSidebar();">
+    <div class="heading">Pinned</div>
+    <div id="pinContainer" class="draggable-container"></div>
+    <div class="heading extra-top-padding">Tasks</div>
+    <div id="taskContainer" class="draggable-container"></div>
+    <!--
+      This is probably a bit of a hack. I placed this here so I can click below the tasksArea
+      and force the sidebar to hide.
+    -->
+    <div id="other">&nbsp;</div> 
+  </div>
+
+  <div id="sidebar">
+
+    <div id="sidebarHeader">
+      <div id="sidebarTitle"></div>
+      <img src="./images/arrow_icon.svg" class="arrow-icon" onclick="hideSidebar();"
+           onmouseover="this.src='./images/arrow_icon_purple.svg';" 
+           onmouseout="this.src='./images/arrow_icon.svg';">
+    </div>
+
+    <div id="sidebarMain">
+      <textarea id="sidebarTextArea" placeholder="Add notes here..."></textarea>
+    </div>
+    
+  </div>
+
+  <script src="script.js"></script>
+  
+</body>
+</html>
